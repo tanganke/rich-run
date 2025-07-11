@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rich-run"
+version = "0.1.0"
+description = "A command runner with rich formatting"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Anke Tang", email = "tang.anke@foxmail.com" }]
+requires-python = ">=3.8"
+dependencies = ["rich-cli"]
+
+[project.urls]
+Homepage = "https://github.com/tanganke/rich-run"
+Repository = "https://github.com/tanganke/rich-run"
+
+[project.scripts]
+rich-run = "rich_run.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rich_run*"]
+
+[tool.isort]
+profile = "black"
