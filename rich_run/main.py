@@ -5,6 +5,7 @@ import argparse
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime
 
 
@@ -23,6 +24,18 @@ def run_rich_command(args):
     except FileNotFoundError:
         print("Error: rich command not found")
         sys.exit(1)
+
+
+def format_duration(seconds):
+    """Format duration in a human-readable way."""
+    if seconds < 1:
+        return f"{seconds*1000:.0f}ms"
+    elif seconds < 60:
+        return f"{seconds:.2f}s"
+    else:
+        minutes = int(seconds // 60)
+        remaining_seconds = seconds % 60
+        return f"{minutes}m {remaining_seconds:.2f}s"
 
 
 def main():
@@ -66,10 +79,26 @@ def main():
     # Display separator rule
     run_rich_command(["--rule", "--rule-style", "dim"])
 
+    # Record start time
+    start_time = time.time()
+
     # Execute the actual command
     try:
         # If there's only one argument and it contains shell operators, run it through shell
-        shell_operators = ["&&", "||", "|", ";", ">", ">>", "<", "2>", "2>>", "&", "$(", "`"]
+        shell_operators = [
+            "&&",
+            "||",
+            "|",
+            ";",
+            ">",
+            ">>",
+            "<",
+            "2>",
+            "2>>",
+            "&",
+            "$(",
+            "`",
+        ]
         if len(args.command) == 1 and any(
             op in args.command[0] for op in shell_operators
         ):
@@ -84,22 +113,27 @@ def main():
         print("\nCommand interrupted")
         exit_code = 130
 
+    # Record end time and calculate duration
+    end_time = time.time()
+    duration = end_time - start_time
+
     # Display separator rule
     run_rich_command(["--rule", "--rule-style", "dim"])
 
-    # Display result
+    # Display result with duration
+    duration_str = format_duration(duration)
     if exit_code == 0:
         run_rich_command(
             [
                 "--print",
-                f"[bold green]SUCCESS[/bold green] [dim](exit code: {exit_code})[/dim]",
+                f"[bold green]SUCCESS[/bold green] [dim](exit code: {exit_code}, duration: {duration_str})[/dim]",
             ]
         )
     else:
         run_rich_command(
             [
                 "--print",
-                f"[bold red]FAILED[/bold red] [dim](exit code: {exit_code})[/dim]",
+                f"[bold red]FAILED[/bold red] [dim](exit code: {exit_code}, duration: {duration_str})[/dim]",
             ]
         )
 
