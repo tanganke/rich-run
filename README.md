@@ -2,7 +2,7 @@
 
 A command runner with rich formatting that wraps your commands in elegant panels and provides clear success/failure feedback.
 
-![Example](docs/images/example.png)
+<img src="docs/images/example.png" alt="Example" width="300">
 
 ## Features
 
