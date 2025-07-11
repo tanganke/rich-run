@@ -2,6 +2,8 @@
 
 A command runner with rich formatting that wraps your commands in elegant panels and provides clear success/failure feedback.
 
+![Example](docs/images/example.png)
+
 ## Features
 
 - 🎨 Command output with rich formatting
