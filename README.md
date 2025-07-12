@@ -1,4 +1,12 @@
+<div align="center">
+
 # Rich Run
+
+[![GitHub License](https://img.shields.io/github/license/tanganke/rich-run)](https://github.com/tanganke/rich-run/blob/main/LICENSE)
+[![PyPI - Version](https://img.shields.io/pypi/v/rich-run)](https://pypi.org/project/rich-run/)
+[![Downloads](https://static.pepy.tech/badge/rich-run/month)](https://pepy.tech/project/rich-run)
+
+</div>
 
 A command runner with rich formatting that wraps your commands in elegant panels and provides clear success/failure feedback.
 
