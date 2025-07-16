@@ -8,6 +8,8 @@ import sys
 import time
 from datetime import datetime
 
+from .banner import RICH_RUN_BANNER
+
 
 def check_rich_cli():
     """Check if rich-cli is installed."""
@@ -51,6 +53,7 @@ def main():
     args = parser.parse_args()
 
     if not args.command:
+        print(RICH_RUN_BANNER)
         parser.print_help()
         sys.exit(1)
 
